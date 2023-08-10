@@ -58,8 +58,11 @@ class CPU:
         for i in range(self.speed):
             if not self.paused:
                 opcode = (self.memory[self.pc] << 8 | self.memory[self.pc + 1])
-                self.execute_instruction(opcode)
-
+                try:
+                    self.execute_instruction(opcode)
+                except:
+                    pass
+                
         if not self.paused:
             self.update_timers()
 

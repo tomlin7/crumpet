@@ -7,18 +7,18 @@ class Keyboard:
             '2': 0x2, # 2
             '3': 0x3, # 3
             '4': 0xc, # 4
-            'Q': 0x4, # Q
-            'W': 0x5, # W
-            'E': 0x6, # E
-            'R': 0xD, # R
-            'A': 0x7, # A
-            'S': 0x8, # S
-            'D': 0x9, # D
-            'F': 0xE, # F
-            'Z': 0xA, # Z
-            'X': 0x0, # X
-            'C': 0xB, # C
-            'V': 0xF  # V
+            'q': 0x4, # Q
+            'w': 0x5, # W
+            'e': 0x6, # E
+            'r': 0xD, # R
+            'a': 0x7, # A
+            's': 0x8, # S
+            'd': 0x9, # D
+            'f': 0xE, # F
+            'z': 0xA, # Z
+            'x': 0x0, # X
+            'c': 0xB, # C
+            'v': 0xF  # V
         }
 
         self.keys_pressed = {}
@@ -29,19 +29,18 @@ class Keyboard:
 
     def key_down(self, e):
         if key := self.KEYMAP.get(e.keysym, None):
+            print(e.keysym, key)
             self.keys_pressed[key] = True
 
             if self.on_next != None:
+                print(key)
                 self.on_next(int(key, base=16))
                 self.on_next = None
-
         return "break"
 
     def key_up(self, e):
         if key := self.KEYMAP.get(e.keysym, None):
             self.keys_pressed[key] = False
 
-
     def is_key_pressed(self, keycode):
         return self.keys_pressed.get(keycode, None)
-

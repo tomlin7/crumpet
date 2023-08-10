@@ -34,7 +34,7 @@ class Renderer(tk.Canvas):
         return not self.display[pixelloc]
 
     def clear(self):
-        self.display = [[0]*(self.rows * self.cols)] 
+        self.display = [0] * (self.rows * self.cols)
 
     def render(self):
         self.delete("all")

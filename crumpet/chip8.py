@@ -13,7 +13,7 @@ class Chip8(tk.Frame):
         self.renderer = Renderer(self)
         self.renderer.pack(fill=tk.BOTH)
         
-        self.keyboard = Keyboard(self.renderer)
+        self.keyboard = Keyboard(self.root)
         self.cpu = CPU(self)
 
         self.fps = 60
@@ -22,7 +22,7 @@ class Chip8(tk.Frame):
         self.init()
 
     def init(self):
-        self.fps_interval = 1000 // self.fps
+        self.fps_interval = 10
    
         self.cpu.load_sprites()
         self.cpu.load_rom('roms/PONG')
