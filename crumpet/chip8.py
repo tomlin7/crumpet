@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 
 from renderer import Renderer
@@ -22,7 +23,7 @@ class Chip8(tk.Frame):
         self.init()
 
     def init(self):
-        self.fps_interval = 10
+        self.fps_interval = 1 / self.fps
    
         self.cpu.load_sprites()
         self.cpu.load_rom('roms/PONG')
@@ -31,6 +32,11 @@ class Chip8(tk.Frame):
         self.step()
 
     def step(self):
-        self.cpu.cycle()
-        self.after(self.fps_interval, self.step)
+        start_time = time.time()
 
+        self.cpu.cycle()
+        self.renderer.swap_buffers()
+
+        elapsed_time = time.time() - start_time
+        remaining_time = max(0, self.fps_interval - elapsed_time)
+        self.root.after(int(remaining_time * 1000), self.step)
